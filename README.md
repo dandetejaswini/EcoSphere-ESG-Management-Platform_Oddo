@@ -36,23 +36,23 @@ EcoSphere was built on the Odoo framework for three core reasons:
 
 ### Executive Dashboard - Emission Distribution
 
-![Executive Dashboard Pie Chart](assets/executive-dashboard-pie-chart.png)
+![Executive Dashboard Pie Chart](assets/executive-dashboard-pie-chart.jpeg)
 
 ### Department-wise Carbon Emissions
 
-![Emissions Bar Chart](assets/emissions-bar-chart.png)
+![Emissions Bar Chart](assets/emissions-bar-chart.jpeg)
 
 ### Emissions Trend Analysis
 
-![Emissions Trend](assets/emissions-trend-chart.png)
+![Emissions Trend](assets/emissions-trend-chart.jpeg)
 
 ### Custom Pivot Report
 
-![Pivot Report](assets/emissions-pivot-report.png)
+![Pivot Report](assets/emissions-pivot-report.jpeg)
 
 ### Executive Analytics
 
-![Analytics Line Chart](assets/emissions-analytics-line-chart.png)
+![Analytics Line Chart](assets/emissions-analytics-line-chart.jpeg)
 
 ## Technical Architecture
 
