@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- 1. Categories -->
+        <record id="esg_cat_env_chal" model="esg.category">
+            <field name="name">Environmental Challenge</field>
+            <field name="type">challenge</field>
+        </record>
+        <record id="esg_cat_soc_csr" model="esg.category">
+            <field name="name">Community CSR</field>
+            <field name="type">csr</field>
+        </record>
+
+        <!-- 2. Emission Factors -->
+        <record id="ef_electricity" model="esg.emission.factor">
+            <field name="name">Grid Electricity (kWh)</field>
+            <field name="value">0.85</field>
+        </record>
+        <record id="ef_diesel" model="esg.emission.factor">
+            <field name="name">Diesel Fuel (Liters)</field>
+            <field name="value">2.68</field>
+        </record>
+
+        <!-- 3. Departments -->
+        <record id="esg_dept_mfg" model="esg.department">
+            <field name="name">Manufacturing</field>
+            <field name="code">MFG</field>
+            <field name="employee_count">134</field>
+        </record>
+        <record id="esg_dept_log" model="esg.department">
+            <field name="name">Logistics</field>
+            <field name="code">LOG</field>
+            <field name="employee_count">58</field>
+        </record>
+        <record id="esg_dept_corp" model="esg.department">
+            <field name="name">Corporate</field>
+            <field name="code">CORP</field>
+            <field name="employee_count">41</field>
+        </record>
+        <record id="esg_dept_rnd" model="esg.department">
+            <field name="name">Research &amp; Development</field>
+            <field name="code">RND</field>
+            <field name="employee_count">25</field>
+        </record>
+
+        <!-- 4. Environmental Goals -->
+        <record id="esg_goal_fleet" model="esg.goal">
+            <field name="name">Reduce Fleet Emissions</field>
+            <field name="department_id" ref="esg_dept_log"/>
+            <field name="target_co2">500.0</field>
+            <field name="current_co2">390.0</field>
+            <field name="deadline">2026-12-31</field>
+            <field name="status">active</field>
+        </record>
+        <record id="esg_goal_waste" model="esg.goal">
+            <field name="name">Cut Packaging Waste</field>
+            <field name="department_id" ref="esg_dept_mfg"/>
+            <field name="target_co2">120.0</field>
+            <field name="current_co2">98.0</field>
+            <field name="deadline">2026-09-30</field>
+            <field name="status">on_track</field>
+        </record>
+        <record id="esg_goal_energy" model="esg.goal">
+            <field name="name">Office Energy Cut</field>
+            <field name="department_id" ref="esg_dept_corp"/>
+            <field name="target_co2">80.0</field>
+            <field name="current_co2">80.0</field>
+            <field name="deadline">2026-06-30</field>
+            <field name="status">completed</field>
+        </record>
+
+        <!-- 5. Carbon Transactions (Spread across 6 months for trend charts) -->
+        <record id="txn_jan_mfg" model="esg.carbon.transaction">
+            <field name="name">CT-00810</field>
+            <field name="department_id" ref="esg_dept_mfg"/>
+            <field name="source_type">Manufacturing Batch</field>
+            <field name="calculated_emission">155.0</field>
+            <field name="transaction_date">2026-01-15</field>
+        </record>
+        <record id="txn_feb_log" model="esg.carbon.transaction">
+            <field name="name">CT-00815</field>
+            <field name="department_id" ref="esg_dept_log"/>
+            <field name="source_type">Fleet Fuel</field>
+            <field name="calculated_emission">240.0</field>
+            <field name="transaction_date">2026-02-20</field>
+        </record>
+        <record id="txn_mar_corp" model="esg.carbon.transaction">
+            <field name="name">CT-00820</field>
+            <field name="department_id" ref="esg_dept_corp"/>
+            <field name="source_type">Office Electricity</field>
+            <field name="calculated_emission">95.5</field>
+            <field name="transaction_date">2026-03-10</field>
+        </record>
+        <record id="txn_apr_mfg" model="esg.carbon.transaction">
+            <field name="name">CT-00825</field>
+            <field name="department_id" ref="esg_dept_mfg"/>
+            <field name="source_type">Manufacturing Batch</field>
+            <field name="calculated_emission">142.0</field>
+            <field name="transaction_date">2026-04-05</field>
+        </record>
+        <record id="txn_may_log" model="esg.carbon.transaction">
+            <field name="name">CT-00830</field>
+            <field name="department_id" ref="esg_dept_log"/>
+            <field name="source_type">Fleet Fuel</field>
+            <field name="calculated_emission">220.5</field>
+            <field name="transaction_date">2026-05-18</field>
+        </record>
+        <record id="txn_jun_rnd" model="esg.carbon.transaction">
+            <field name="name">CT-00835</field>
+            <field name="department_id" ref="esg_dept_rnd"/>
+            <field name="source_type">Lab Electricity</field>
+            <field name="calculated_emission">65.0</field>
+            <field name="transaction_date">2026-06-22</field>
+        </record>
+        <record id="txn_jul_mfg" model="esg.carbon.transaction">
+            <field name="name">CT-00840</field>
+            <field name="department_id" ref="esg_dept_mfg"/>
+            <field name="source_type">Manufacturing Batch</field>
+            <field name="calculated_emission">138.0</field>
+            <field name="transaction_date">2026-07-02</field>
+        </record>
+        <record id="txn_jul_log" model="esg.carbon.transaction">
+            <field name="name">CT-00841</field>
+            <field name="department_id" ref="esg_dept_log"/>
+            <field name="source_type">Fleet Fuel</field>
+            <field name="calculated_emission">210.2</field>
+            <field name="transaction_date">2026-07-11</field>
+        </record>
+
+        <!-- 6. Compliance Issues (Includes Past Due Dates for UI Testing) -->
+        <record id="comp_issue_1" model="esg.compliance.issue">
+            <field name="name">Missing MSDS Sheets</field>
+            <field name="severity">high</field>
+            <field name="description">Material Safety Data Sheets missing for warehouse chemical storage.</field>
+            <field name="due_date">2026-06-15</field>
+            <field name="status">open</field>
+        </record>
+        <record id="comp_issue_2" model="esg.compliance.issue">
+            <field name="name">Late Vendor Disclosure</field>
+            <field name="severity">medium</field>
+            <field name="description">Tier 2 supplier has not submitted Q2 emissions report.</field>
+            <field name="due_date">2026-07-05</field>
+            <field name="status">resolved</field>
+        </record>
+        <record id="comp_issue_3" model="esg.compliance.issue">
+            <field name="name">Incomplete Fire Drill Log</field>
+            <field name="severity">low</field>
+            <field name="description">Sign-in sheet for the June fire drill is missing three signatures.</field>
+            <field name="due_date">2026-07-30</field>
+            <field name="status">open</field>
+        </record>
+
+        <!-- 7. CSR Activities -->
+        <record id="csr_tree" model="esg.csr.activity">
+            <field name="name">Urban Tree Plantation</field>
+            <field name="category_id" ref="esg_cat_soc_csr"/>
+            <field name="description">Join us at the city park to plant 500 saplings.</field>
+            <field name="status">planned</field>
+        </record>
+        <record id="csr_blood" model="esg.csr.activity">
+            <field name="name">Annual Blood Donation</field>
+            <field name="category_id" ref="esg_cat_soc_csr"/>
+            <field name="description">Mobile blood bank will be at the main corporate office.</field>
+            <field name="status">active</field>
+        </record>
+        <record id="csr_cleanup" model="esg.csr.activity">
+            <field name="name">Beach Cleanup Drive</field>
+            <field name="category_id" ref="esg_cat_soc_csr"/>
+            <field name="description">Weekend cleanup of the public beach area.</field>
+            <field name="status">completed</field>
+        </record>
+
+        <!-- 8. Gamification Challenges -->
+        <record id="chal_bike" model="esg.challenge">
+            <field name="name">Bike-to-Work Month</field>
+            <field name="category_id" ref="esg_cat_env_chal"/>
+            <field name="description">Commute via bicycle for 15 days this month.</field>
+            <field name="xp">300</field>
+            <field name="difficulty">medium</field>
+            <field name="evidence_required">True</field>
+            <field name="deadline">2026-07-31</field>
+            <field name="status">active</field>
+        </record>
+        <record id="chal_paper" model="esg.challenge">
+            <field name="name">Paperless Sprint</field>
+            <field name="category_id" ref="esg_cat_env_chal"/>
+            <field name="description">Zero prints sent to the office printer for two weeks.</field>
+            <field name="xp">150</field>
+            <field name="difficulty">easy</field>
+            <field name="evidence_required">False</field>
+            <field name="deadline">2026-08-15</field>
+            <field name="status">draft</field>
+        </record>
+        <record id="chal_energy" model="esg.challenge">
+            <field name="name">Energy Auditor</field>
+            <field name="category_id" ref="esg_cat_env_chal"/>
+            <field name="description">Identify and report three high-energy waste points in your department.</field>
+            <field name="xp">500</field>
+            <field name="difficulty">hard</field>
+            <field name="evidence_required">True</field>
+            <field name="deadline">2026-06-30</field>
+            <field name="status">completed</field>
+        </record>
+
+        <!-- 9. Rewards Catalog -->
+        <record id="reward_coffee" model="esg.reward">
+            <field name="name">Free Premium Coffee</field>
+            <field name="points_required">500</field>
+            <field name="stock">100</field>
+            <field name="status">available</field>
+        </record>
+        <record id="reward_swag" model="esg.reward">
+            <field name="name">Eco-Friendly Company Jacket</field>
+            <field name="points_required">1500</field>
+            <field name="stock">20</field>
+            <field name="status">available</field>
+        </record>
+        <record id="reward_pto" model="esg.reward">
+            <field name="name">Half-Day Extra PTO</field>
+            <field name="points_required">5000</field>
+            <field name="stock">5</field>
+            <field name="status">out_of_stock</field>
+        </record>
+    </data>
+</odoo>
