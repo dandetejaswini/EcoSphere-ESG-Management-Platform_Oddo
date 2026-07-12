@@ -1,6 +1,16 @@
 # EcoSphere: ESG Management Platform
 
+![EcoSphere Banner](assets/ecosphere-banner.png)
+
 EcoSphere is a custom Odoo ERP module engineered to integrate Environmental, Social, and Governance (ESG) metrics directly into daily business operations. It replaces manual sustainability tracking with an automated, analytical workflow that drives accountability at scale.
+
+## 🎥 Demo Video
+
+Watch the complete project demonstration here:
+
+**Demo Video:** https://drive.google.com/file/d/1o9MdbIt2pg8-xzvT_KZZRF2CzN_VS9Ql/view
+
+---
 
 ## The Business Solution
 
@@ -21,6 +31,28 @@ EcoSphere was built on the Odoo framework for three core reasons:
 - Gamified CSR: Drives employee engagement via XP-based sustainability challenges and redeemable rewards.
 - Evidence Enforcement: Mandates documentation for CSR approvals to maintain audit readiness.
 - Weighted Department Scoring: Aggregates environmental, social, and governance metrics into clear performance rankings.
+
+## 📸 Platform Preview
+
+### Executive Dashboard - Emission Distribution
+
+![Executive Dashboard Pie Chart](assets/executive-dashboard-pie-chart.png)
+
+### Department-wise Carbon Emissions
+
+![Emissions Bar Chart](assets/emissions-bar-chart.png)
+
+### Emissions Trend Analysis
+
+![Emissions Trend](assets/emissions-trend-chart.png)
+
+### Custom Pivot Report
+
+![Pivot Report](assets/emissions-pivot-report.png)
+
+### Executive Analytics
+
+![Analytics Line Chart](assets/emissions-analytics-line-chart.png)
 
 ## Technical Architecture
 
@@ -44,8 +76,8 @@ Built as a modular Odoo application, EcoSphere utilizes a dual data model struct
 - Compliance Audits
 
 > ⚠️ **Important Note: Sample Data**
-
-This module includes a built-in demo dataset (`data/esg_demo_data.xml`) for testing and visualization purposes. This data is purely synthetic (dummy data) and is intended to populate the executive dashboard, pivot tables, and KPI cards immediately upon installation. Do not use this data for official reporting.
+>
+> This module includes a built-in demo dataset (`data/esg_demo_data.xml`) for testing and visualization purposes. This data is purely synthetic (dummy data) and is intended to populate the executive dashboard, pivot tables, and KPI cards immediately upon installation. Do not use this data for official reporting.
 
 ## Installation Guide
 
