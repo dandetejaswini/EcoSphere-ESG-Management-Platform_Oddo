@@ -52,7 +52,7 @@ EcoSphere was built on the Odoo framework for three core reasons:
 
 ### Executive Analytics
 
-![Analytics Line Chart](assets/emissions-analytics-line-chart.jpeg)
+![Analytics Line Chart](assets/emissions-analytics-lince-chart.jpeg)
 
 ## Technical Architecture
 
