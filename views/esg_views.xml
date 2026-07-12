@@ -1,70 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_esg_department_tree" model="ir.ui.view">
-        <field name="name">esg.department.tree</field>
-        <field name="model">esg.department</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="name"/>
-                <field name="code"/>
-                <field name="head_id"/>
-                <field name="employee_count"/>
-                <field name="status"/>
-            </tree>
-        </field>
-    </record>
-
-    <record id="view_esg_carbon_transaction_tree" model="ir.ui.view">
-        <field name="name">esg.carbon.transaction.tree</field>
+    <!-- Core Views -->
+    <record id="view_esg_carbon_list" model="ir.ui.view">
+        <field name="name">esg.carbon.list</field>
         <field name="model">esg.carbon.transaction</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name"/>
+                <field name="department_id"/>
                 <field name="source_type"/>
-                <field name="source_amount"/>
-                <field name="calculated_emission" sum="Total Emissions"/>
+                <field name="calculated_emission" sum="Total"/>
                 <field name="transaction_date"/>
-            </tree>
+            </list>
         </field>
     </record>
 
-    <record id="view_esg_compliance_issue_tree" model="ir.ui.view">
-        <field name="name">esg.compliance.issue.tree</field>
+    <record id="view_esg_carbon_pivot" model="ir.ui.view">
+        <field name="name">esg.carbon.pivot</field>
+        <field name="model">esg.carbon.transaction</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="department_id" type="row"/>
+                <field name="source_type" type="col"/>
+                <field name="calculated_emission" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_esg_carbon_graph" model="ir.ui.view">
+        <field name="name">esg.carbon.graph</field>
+        <field name="model">esg.carbon.transaction</field>
+        <field name="arch" type="xml">
+            <graph type="pie">
+                <field name="department_id"/>
+                <field name="calculated_emission" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_esg_compliance_list" model="ir.ui.view">
+        <field name="name">esg.compliance.list</field>
         <field name="model">esg.compliance.issue</field>
         <field name="arch" type="xml">
-            <tree decoration-danger="is_overdue == True">
+            <list decoration-danger="is_overdue == True">
                 <field name="name"/>
                 <field name="severity"/>
                 <field name="owner_id"/>
                 <field name="due_date"/>
                 <field name="status"/>
                 <field name="is_overdue" invisible="1"/>
-            </tree>
+            </list>
         </field>
     </record>
 
+    <record id="view_esg_csr_participation_list" model="ir.ui.view">
+        <field name="name">esg.csr.participation.list</field>
+        <field name="model">esg.csr.participation</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="employee_id"/>
+                <field name="activity_id"/>
+                <field name="approval_status"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- NEW: Dashboard Action -->
+    <record id="action_esg_dashboard" model="ir.actions.act_window">
+        <field name="name">Executive Dashboard</field>
+        <field name="res_model">esg.carbon.transaction</field>
+        <field name="view_mode">graph,pivot,list</field>
+    </record>
+
+    <!-- NEW: Reports Action -->
+    <record id="action_esg_reports" model="ir.actions.act_window">
+        <field name="name">Custom Reports</field>
+        <field name="res_model">esg.carbon.transaction</field>
+        <field name="view_mode">pivot,list</field>
+    </record>
+
+    <!-- Standard Actions -->
     <record id="action_esg_department" model="ir.actions.act_window">
         <field name="name">Departments</field>
         <field name="res_model">esg.department</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <record id="action_esg_carbon" model="ir.actions.act_window">
-        <field name="name">Carbon Accounting</field>
+        <field name="name">Carbon Ledger</field>
         <field name="res_model">esg.carbon.transaction</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form,pivot,graph</field>
     </record>
 
     <record id="action_esg_compliance" model="ir.actions.act_window">
-        <field name="name">Compliance Management</field>
+        <field name="name">Compliance Issues</field>
         <field name="res_model">esg.compliance.issue</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
-    <menuitem id="menu_esg_root" name="EcoSphere ESG" web_icon="ecosphere_esg,static/description/icon.png"/>
+    <record id="action_esg_csr_participation" model="ir.actions.act_window">
+        <field name="name">CSR Approvals</field>
+        <field name="res_model">esg.csr.participation</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_esg_challenges" model="ir.actions.act_window">
+        <field name="name">Challenges</field>
+        <field name="res_model">esg.challenge</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_esg_rewards" model="ir.actions.act_window">
+        <field name="name">Rewards</field>
+        <field name="res_model">esg.reward</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu Structure -->
+    <menuitem id="menu_esg_root" name="EcoSphere ESG"/>
+    
+    <!-- NEW: Dashboard Menu placed at the top -->
+    <menuitem id="menu_esg_dashboard" name="Dashboard" parent="menu_esg_root" sequence="5" action="action_esg_dashboard"/>
+
     <menuitem id="menu_esg_master" name="Master Configurations" parent="menu_esg_root" sequence="10"/>
     <menuitem id="menu_esg_dept" name="Departments" parent="menu_esg_master" action="action_esg_department"/>
-    <menuitem id="menu_esg_operations" name="Operations" parent="menu_esg_root" sequence="20"/>
-    <menuitem id="menu_esg_carbon_trans" name="Carbon Ledger" parent="menu_esg_operations" action="action_esg_carbon"/>
-    <menuitem id="menu_esg_comp_issues" name="Compliance Issues" parent="menu_esg_operations" action="action_esg_compliance"/>
+    <menuitem id="menu_esg_rewards" name="Rewards Catalog" parent="menu_esg_master" action="action_esg_rewards"/>
+
+    <menuitem id="menu_esg_environmental" name="Environmental" parent="menu_esg_root" sequence="20"/>
+    <menuitem id="menu_esg_carbon_trans" name="Carbon Tracker" parent="menu_esg_environmental" action="action_esg_carbon"/>
+
+    <menuitem id="menu_esg_social" name="Social" parent="menu_esg_root" sequence="30"/>
+    <menuitem id="menu_esg_csr_part" name="CSR Approvals" parent="menu_esg_social" action="action_esg_csr_participation"/>
+
+    <menuitem id="menu_esg_gamification" name="Gamification" parent="menu_esg_root" sequence="40"/>
+    <menuitem id="menu_esg_challenge_menu" name="Active Challenges" parent="menu_esg_gamification" action="action_esg_challenges"/>
+
+    <menuitem id="menu_esg_governance" name="Governance" parent="menu_esg_root" sequence="50"/>
+    <menuitem id="menu_esg_comp_issues" name="Compliance Flags" parent="menu_esg_governance" action="action_esg_compliance"/>
+
+    <!-- NEW: Reports Menu placed at the bottom -->
+    <menuitem id="menu_esg_reports" name="Reports" parent="menu_esg_root" sequence="60" action="action_esg_reports"/>
+
+    <!-- Settings Implementation -->
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.esg</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="20"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="EcoSphere ESG" string="EcoSphere ESG" name="ecosphere_esg">
+                    <block title="Core Configuration" name="esg_core_config">
+                        <setting string="Notification System" help="Enable automated alerts for compliance and emissions.">
+                            <field name="esg_enable_notifications"/>
+                        </setting>
+                        <setting string="Auto Emission Calculation" help="Automatically calculate CO2 equivalents on entry.">
+                            <field name="esg_enable_auto_emission"/>
+                        </setting>
+                        <setting string="Evidence Requirement" help="Mandate file attachments for carbon transactions.">
+                            <field name="esg_enable_evidence_req"/>
+                        </setting>
+                        <setting string="Badge Auto-Award" help="Automatically issue gamification badges upon challenge completion.">
+                            <field name="esg_enable_badge_auto"/>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_esg_config_settings" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="context">{'module' : 'ecosphere_esg'}</field>
+    </record>
+
+    <menuitem id="menu_esg_settings" name="Settings" parent="menu_esg_master" action="action_esg_config_settings" sequence="100"/>
 </odoo>
