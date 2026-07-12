@@ -1,6 +1,6 @@
 # EcoSphere: ESG Management Platform
 
-![EcoSphere Banner](assets/ecosphere-banner.png)
+![EcoSphere Banner](assets/ecosphere-banner.jpeg)
 
 EcoSphere is a custom Odoo ERP module engineered to integrate Environmental, Social, and Governance (ESG) metrics directly into daily business operations. It replaces manual sustainability tracking with an automated, analytical workflow that drives accountability at scale.
 
