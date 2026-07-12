@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_esg_department_tree" model="ir.ui.view">
+        <field name="name">esg.department.tree</field>
+        <field name="model">esg.department</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="head_id"/>
+                <field name="employee_count"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esg_carbon_transaction_tree" model="ir.ui.view">
+        <field name="name">esg.carbon.transaction.tree</field>
+        <field name="model">esg.carbon.transaction</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="source_type"/>
+                <field name="source_amount"/>
+                <field name="calculated_emission" sum="Total Emissions"/>
+                <field name="transaction_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esg_compliance_issue_tree" model="ir.ui.view">
+        <field name="name">esg.compliance.issue.tree</field>
+        <field name="model">esg.compliance.issue</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="is_overdue == True">
+                <field name="name"/>
+                <field name="severity"/>
+                <field name="owner_id"/>
+                <field name="due_date"/>
+                <field name="status"/>
+                <field name="is_overdue" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_esg_department" model="ir.actions.act_window">
+        <field name="name">Departments</field>
+        <field name="res_model">esg.department</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_esg_carbon" model="ir.actions.act_window">
+        <field name="name">Carbon Accounting</field>
+        <field name="res_model">esg.carbon.transaction</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_esg_compliance" model="ir.actions.act_window">
+        <field name="name">Compliance Management</field>
+        <field name="res_model">esg.compliance.issue</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_esg_root" name="EcoSphere ESG" web_icon="ecosphere_esg,static/description/icon.png"/>
+    <menuitem id="menu_esg_master" name="Master Configurations" parent="menu_esg_root" sequence="10"/>
+    <menuitem id="menu_esg_dept" name="Departments" parent="menu_esg_master" action="action_esg_department"/>
+    <menuitem id="menu_esg_operations" name="Operations" parent="menu_esg_root" sequence="20"/>
+    <menuitem id="menu_esg_carbon_trans" name="Carbon Ledger" parent="menu_esg_operations" action="action_esg_carbon"/>
+    <menuitem id="menu_esg_comp_issues" name="Compliance Issues" parent="menu_esg_operations" action="action_esg_compliance"/>
+</odoo>
