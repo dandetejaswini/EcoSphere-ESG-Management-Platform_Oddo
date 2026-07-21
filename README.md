@@ -32,7 +32,7 @@ EcoSphere was built on the Odoo framework for three core reasons:
 - Evidence Enforcement: Mandates documentation for CSR approvals to maintain audit readiness.
 - Weighted Department Scoring: Aggregates environmental, social, and governance metrics into clear performance rankings.
 
-## 📸 Platform Preview
+## Platform Preview
 
 ### Executive Dashboard - Emission Distribution
 
